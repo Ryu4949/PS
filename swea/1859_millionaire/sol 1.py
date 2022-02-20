@@ -1,25 +1,19 @@
-#fail
-
 T = int(input())
-for tc in range(1, T+1):
+for tc in range(1, T + 1):
     n = int(input())
-    price = list(map(int, input().split()))
-    act = ['sell'] * n
+    info = list(map(int, input().split()))
 
-    for i in range(len(price)):
-        for j in range(i+1, n):
-            if price[i] < price[j]:
-                act[i] = 'buy'
-                break
+    # 입력받은 가격 정보를 뒤에서부터 검토
+    profit = 0
 
-    cnt = 0
-    money = 0
-    for i in range(n):
-        if act[i] == 'buy':
-            cnt += 1
-            money -= price[i]
+    # j는 판매 가격을 나타내는 인덱스인데, 뒤에서부터 앞으로 가면서
+    # j번째 인덱스의 가격보다 낮은 가격에 대해서는 그 차이만큼 더해주고
+    # j번째 인덱스의 가격보다 큰 가격을 만나면, j를 그 때의 인덱스로 교체해줌
+    j = n - 1
+    for i in range(n - 1, -1, -1):
+        if info[i] <= info[j]:
+            profit += info[j] - info[i]
         else:
-            money += cnt * price[i]
-            cnt = 0
+            j = i
 
-    print(f'#{tc} {money}')
+    print(f'#{tc} {profit}')

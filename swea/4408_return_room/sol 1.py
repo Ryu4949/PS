@@ -1,18 +1,20 @@
-#방번호가 짝수: i는 0부터 199까지라고할 때
-#입력값은 항상 작은 번호 - 큰 번호 순으로 바꿔줌
-#앞에 번호: 짝수면 -1 홀수면 그대로
-#뒤에 번호: 짝수면 그대로 홀수면 +1
-#이게 동선의 범위
+#1, 2를 1, 3, 4를 2 ... 이런 식으로 400개의 방을 1~200으로 압축
+#
+T = int(input())
+for tc in range(1, T+1):
+    n = int(input())
+    route = [0] * 201
+    for _ in range(n):
+        a, b = map(int, input().split())
+        if a > b:
+            a, b = b, a
 
-#같이 이동할 수 있는 세트를 묶자
-#일단 돌아가야할 학생 수만큼 빈 리스트를 갖는 리스트 생성
-#4명이면 [[], [], [], []]
-#동선범위 리스트를 하
+        for i in range((a+1)//2, (b+1)//2 + 1):
+            route[i] += 1
 
-a, b = map(int, input().split())
-if a >= b:
-    a, b = (b+1)//2, (a+1)//2
-else:
-    a, b = (a+1)//2, (b+1)//2
+    time = 0
+    for i in range(201):
+        if route[i] > time:
+            time = route[i]
 
-#1, 10 5, 17
+    print(f'#{tc} {time}')
