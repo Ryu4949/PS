@@ -1,19 +1,24 @@
-def check(data):
-    stack = []
-    for i in data:
-        #여는 괄호면
-        if i == '(':
-            stack.append(i)
-        else:
-            if len(stack) == 0:
-                return False
-            else:
-                stack.pop()
+def powerset(idx, N):
 
-    if len(stack) == 0:
-        return True
-    else:
-        return False
+    if idx == N:  # 종료 조건
+        print(bit)
+        return
 
-data = input()
-print(check(data))
+    #백트래킹
+    # check = 0
+    # if bit[i]:
+        # check += ...
+
+
+    bit[idx] = 1
+    powerset(idx + 1, N)
+
+    bit[idx] = 0
+    powerset(idx + 1, N)
+
+
+a = [0, 7, 2, 3]
+N = len(a)
+bit = [0] * N
+
+powerset(idx=0, N=N)
