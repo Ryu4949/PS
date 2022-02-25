@@ -1,37 +1,32 @@
-N, M = map(int, input().split())
-graph = []
-for _ in range(N):
-    graph.append(list(input()))
+from collections import deque
 
+T = int(input())
+for _ in range(T):
+    N = int(input())
+    sx, sy = map(int, input().split())
+    gx, gy = map(int, input().split())
 
-def dfs_hor(x, y):
-    if x <= -1 or x >= N or y <= -1 or y >= M:
-        return False
+    dr = [2, 1, -1, -2, -2, -1, 1, 2]
+    dc = [-1, -2, -2, -1, 1, 2, 2, 1]
 
-    if graph[x][y] == '-':
-        graph[x][y] = 0
-        dfs_hor(x, y-1)
-        dfs_hor(x, y+1)
-        return True
-    return False
+    board = [[0] * N for _ in range(N)]
+    visited = [[False] * N for _ in range(N)]
 
-def dfs_ver(x, y):
-    if x <= -1 or x >= N or y <= -1 or y >= M:
-        return False
+    def bfs(r, c):
+        queue = deque([(r, c)])
+        if sx == gx and sy == gy:
+            return 0
 
-    if graph[x][y] == '|':
-        graph[x][y] = 0
-        dfs_ver(x - 1, y)
-        dfs_ver(x + 1, y)
-        return True
+        while queue:
+            r, c = queue.popleft()
 
-    return False
+            for i in range(8):
+                rr, cc = r+dr[i], c+dc[i]
+                if 0<=rr<N and 0<=cc<N and board[rr][cc] == 0:
+                    queue.append((rr, cc))
+                    board[rr][cc] = board[r][c] + 1
 
-result = 0
+                    if (rr, cc) == (gx, gy):
+                        return board[rr][cc]
 
-for i in range(N):
-    for j in range(M):
-        if dfs_hor(i, j) == True or dfs_ver(i, j) == True:
-            result += 1
-
-print(result)
+    print(bfs(sx, sy))

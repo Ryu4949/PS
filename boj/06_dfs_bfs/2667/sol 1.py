@@ -10,18 +10,18 @@ home_cnt = []
 def dfs(r, c):
     global cnt
 
-    if r < 0 or r >= N or c < 0 or c >= N:
-        return False
-
-    if graph[r][c] == 1:
-        cnt += 1
-        graph[r][c] = 0
-        for i in range(4):
-            rr = r + dr[i]
-            cc = c + dc[i]
-            dfs(rr, cc)
-        return True
-    return False
+    # if r < 0 or r >= N or c < 0 or c >= N:
+    #     return False
+    #
+    # if graph[r][c] == 1:
+    #     cnt += 1
+    #     graph[r][c] = 0
+    #     for i in range(4):
+    #         rr = r + dr[i]
+    #         cc = c + dc[i]
+    #         dfs(rr, cc)
+    #     return True
+    # return False
 
 for i in range(N):
     for j in range(N):
