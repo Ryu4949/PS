@@ -21,6 +21,7 @@ def dijkstra(start):
     while q:
         dist, now = heapq.heappop(q)
 
+        #이미 출발점부터 now까지 거리가 dist보다 짧다면 이하 무시
         if distance[now] < dist:
             continue
 
