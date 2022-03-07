@@ -8,12 +8,17 @@ def factorial(N):
 
 def perm(string, i):
     global cnt
+
+    #문자열 하나 완성되면 cnt 1 증가
     if i == len(word):
         cnt += 1
+        #cnt가 찾는 순번과 같아지면 해당 문자열 반환
         if cnt == N:
             return string
     else:
+        #문자열 앞에서부터
         for j in word:
+            #아직 추가하지 않은 문자열 추가
             if j not in string:
                 per = perm(string+j, i+1)
                 if per:

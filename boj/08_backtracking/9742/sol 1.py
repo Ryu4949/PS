@@ -32,5 +32,6 @@ while True:
         N = int(N)
         rlt = []
         print(f'{word} {N} = {find_perm(word_list, N)}')
+        print(f'ans: {rlt}')
     except:
         break
