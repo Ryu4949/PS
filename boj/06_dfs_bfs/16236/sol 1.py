@@ -36,10 +36,12 @@ def bfs(r, c):
         for i in range(4):
             rr, cc = r+dr[i], c+dc[i]
 
+            #범위 내이고 상어가 지나갈 수 있는 경우
             if 0<=rr<N and 0<=cc<N and not visited[rr][cc] and graph[rr][cc] <= size:
                 queue.append((d+1, rr, cc))
                 visited[rr][cc] = True
 
+                #그때 상어보다 작은 크기의 물고기가 있는 경우
                 if 0< graph[rr][cc] < size:
                     heapq.heappush(fish, (d+1, rr, cc))
 
