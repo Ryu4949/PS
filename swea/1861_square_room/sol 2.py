@@ -1,23 +1,21 @@
-#시간초과
-
 from collections import deque
 
-def bfs(r, c):
-    if visited[r][c] != -1:
-        return
-
-    queue = deque([(r, c)])
-    visited[r][c] = 1
+def bfs(x, y):
+    cnt = 1
+    queue = deque([(x, y)])
+    visited[room[x][y]] = True
 
     while queue:
         r, c = queue.popleft()
 
         for i in range(4):
             rr, cc = r+dr[i], c+dc[i]
-            if 0<=rr<N and 0<=cc<N and visited[rr][cc]==-1 and room[rr][cc] == room[r][c] + 1:
-                visited[rr][cc] = visited[r][c] + 1
+            if 0<=rr<N and 0<=cc<N and room[rr][cc] == room[r][c] + 1:
+                cnt += 1
                 queue.append((rr, cc))
+                visited[room[rr][cc]] = True
 
+    rlt.append((cnt, room[x][y]))
 
 T = int(input())
 for tc in range(1, T+1):
@@ -25,14 +23,16 @@ for tc in range(1, T+1):
     room = []
     for _ in range(N):
         room.append(list(map(int, input().split())))
+    visited = [False] * (N**2+1)
+    rlt = []
 
     dr = [-1, 1, 0, 0]
     dc = [0, 0, -1, 1]
 
-    visited = [[-1] * N for _ in range(N)]
-
     for i in range(N):
         for j in range(N):
-            bfs(i, j)
+            if not visited[room[i][j]]:
+                bfs(i, j)
+    rlt.sort(key = lambda x: (-x[0], x[1]))
 
-    print(f'#{tc} {start} {ans}')
+    print(f'#{tc} {rlt[0][1]} {rlt[0][0]}')
