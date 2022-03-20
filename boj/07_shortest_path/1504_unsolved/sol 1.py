@@ -23,14 +23,14 @@ for _ in range(E):
     a, b, c = map(int, input().split())
     graph[a].append((b, c))
     graph[b].append((a, c))
-v1, v2 = map(int, input().split())
+necessary = list(map(int, input().split()))
+waypoint = [[] for _ in range(V+1)]
 
 def dijkstra(start):
     q = []
     heapq.heappush(q, (0, start))
     distance[start] = 0
-    check_v1 = False
-    check_v2 = False
+    waypoint[start].append(start)
 
     while q:
         dist, now = heapq.heappop(q)
@@ -43,8 +43,16 @@ def dijkstra(start):
             if cost < distance[i[0]]:
                 distance[i[0]] = cost
                 heapq.heappush(q, (cost, i[0]))
+                waypoint[i[0]] = waypoint[now] + [i[0]]
+
+            elif i[0] in necessary and i[0] not in waypoint[now]:
+                distance[i[0]] = cost
+                heapq.heappush(q, (cost, i[0]))
+                waypoint[i[0]] = waypoint[now] + [i[0]]
 
 dijkstra(start)
+
+print(waypoint)
 
 ans = distance[-1]
 if ans == float('inf'):
