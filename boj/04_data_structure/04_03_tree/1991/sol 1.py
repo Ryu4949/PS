@@ -16,7 +16,6 @@ def postorder(v):
         postorder(ch[tree[v]][1])
         print(v, end='')
 
-
 N = int(input())
 tree = dict()
 ch = [[] for _ in range(N+1)]
@@ -32,6 +31,6 @@ print()
 inorder('A')
 print()
 postorder('A')
-#
-# print(tree)
-# print(ch)
+
+print(tree)
+print(ch)
