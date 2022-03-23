@@ -6,7 +6,7 @@ def synergy(food):
     return synergy_food
 
 def dfs(i):
-    if len(A) > N // 2 or len(B) > N // 2:
+    if len(A) > N//2 or len(B) > N//2:
         return
 
     if i == N:
