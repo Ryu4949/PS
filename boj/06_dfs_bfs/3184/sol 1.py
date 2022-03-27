@@ -11,9 +11,9 @@ def bfs(r, c):
     sheep = 0
     queue = deque([(r, c)])
     visited[r][c] = True
-    if visited[r][c] == 'v':
+    if field[r][c] == 'v':
         wolves += 1
-    elif visited[r][c] == 'o':
+    elif field[r][c] == 'o':
         sheep += 1
 
     while queue:
@@ -30,7 +30,7 @@ def bfs(r, c):
 
                 visited[rr][cc] = True
                 queue.append((rr, cc))
-    print(f'조정 전 wolves: {wolves}, sheep: {sheep}')
+
     if wolves >= sheep:
         sheep = 0
     else:
@@ -43,7 +43,6 @@ for i in range(R):
     for j in range(C):
         if not visited[i][j] and field[i][j] != '#':
             rlt = bfs(i, j)
-            print(f'i, j: {i, j}, sheep, wolves: {rlt[0], rlt[1]}')
             cnt[0] += rlt[0]
             cnt[1] += rlt[1]
 
