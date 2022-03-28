@@ -24,7 +24,7 @@ def paper(arr):
     paper(right_down)
 
     #이 return은 꼭 필요한가?
-    return
+    # return
 
 N = int(input())
 data = [list(map(int, input().split())) for _ in range(N)]
