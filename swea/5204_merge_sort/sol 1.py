@@ -1,11 +1,11 @@
 def mergesort(arr):
     global cnt
-    if len(arr) <= 1:
+    if len(arr) < 2:
         return arr
 
     mid = len(arr) // 2
-    left = mergesort(arr[:mid])
-    right = mergesort(arr[mid:])
+    low_arr = mergesort(arr[:mid])
+    high_arr = mergesort(arr[mid:])
 
     merged_arr = []
     l = h = 0

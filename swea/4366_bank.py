@@ -1,38 +1,36 @@
-def binary(nums):
-    rlt = 0
-    for i in range(len(nums)):
-        if nums[len(nums)-i-1]:
-            rlt += 2 ** i
+def preorder(v):
+    if v:
+        print(v, end=' ')
+        preorder(ch1[v])
+        preorder(ch2[v])
 
-    return rlt
+def inorder(v):
+    if v:
+        inorder(ch1[v])
+        print(v, end= ' ')
+        inorder(ch2[v])
 
-def trinary(nums):
-    rlt = 0
-    for i in range(len(nums)):
-        if nums[len(nums) - i - 1]:
-            rlt += (3 ** i) * nums[len(nums)-i-1]
+def postorder(v):
+    if v:
+        postorder(ch1[v])
+        postorder(ch2[v])
+        print(v, end=' ')
 
-    return rlt
+V, E = map(int, input().split())
+edges = list(map(int, input().split()))
+ch1 = [0] * (V+1)
+ch2 = [0] * (V+1)
+for i in range(E):
+    if ch1[edges[2*i]] != 0:
+        ch2[edges[2*i]] = edges[2*i+1]
+    else:
+        ch1[edges[2*i]] = edges[2*i+1]
 
-T = int(input())
-for tc in range(1, T+1):
-    bin = list(map(int, list(input())))
-    tri = list(map(int, list(input())))
-
-    bi = []
-    tr = []
-
-    for i in range(len(bin)):
-        for j in range(2):
-            bin[i] = (bin[i] + 1) % 2
-            bi.append(binary(bin))
-
-    for i in range(len(tri)):
-        for j in range(3):
-            tri[i] = (tri[i] + 1) % 3
-            tr.append(trinary(tri))
-
-    for i in bi:
-        if i in tr:
-            print(f'#{tc} {i}')
-            break
+print('전위 순회 :', end=' ')
+preorder(1)
+print()
+print('중위 순회 :', end=' ')
+inorder(1)
+print()
+print('후위 순회 :', end=' ')
+postorder(1)

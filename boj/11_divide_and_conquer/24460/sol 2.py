@@ -7,6 +7,9 @@ def second_min(i, j):
     return nums[1]
 
 def choose(i, j, size):
+    if size == 1:
+        return chairs[0][0]
+
     if size == 2:
         return second_min(i, j)
 
