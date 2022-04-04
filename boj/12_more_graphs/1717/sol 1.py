@@ -17,7 +17,7 @@ def union(parent, a, b):
         parent[a] = b
 
 N, M = map(int, input().split())
-parent = [-1] * (N+1)
+parent = [0] * (N+1)
 
 for i in range(N+1):
     parent[i] = i
