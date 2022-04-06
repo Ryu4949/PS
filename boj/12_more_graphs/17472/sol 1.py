@@ -58,6 +58,7 @@ def union(a, b):    #union 함수
     else:
         parent[a] = b
 
+
 N, M = map(int, input().split())
 graph = [[*map(int, input().split())] for _ in range(N)]
 visited = [[False] * M for _ in range(N)]
@@ -67,7 +68,6 @@ dr = [-1, 1, 0, 0]
 dc = [0, 0, -1, 1]
 
 island = 0  #섬 몇개?
-
 for i in range(N):
     for j in range(M):
         if graph[i][j] and not visited[i][j]:
@@ -86,7 +86,7 @@ bridges.sort(key=lambda x: x[2])    #다리 길이 오름차순 정렬
 ans = 0
 parent = [i for i in range(island)]
 
-for i in bridges:
+for i in bridges:   #MST
     if find(i[0]) != find(i[1]):
         union(i[0], i[1])
         ans += i[2]
