@@ -1,5 +1,4 @@
 from collections import deque
-from pprint import pprint
 
 M, N = map(int, input().split())
 K = int(input())
@@ -25,7 +24,31 @@ gr -= 1
 dr = [-1, 1, 0, 0]
 dc = [0, 0, -1, 1]
 
-visited =
+visited = [[K+1] * M for _ in range(N)]
 
 def bfs(r, c):
-    queue = deque([(r, c)])
+    queue = deque()
+    queue.append((r, c, graph[r][c]))
+    visited[r][c] = 1
+
+    while queue:
+        r, c, b = queue.popleft()
+        print(f'r, c, b: {r, c, b}')
+
+        for i in range(4):
+            rr, cc = r+dr[i], c+dc[i]
+
+            if 0<=rr<N and 0<=cc<M and graph[rr][cc] and visited[r][c]+1 <= visited[rr][cc]:
+                bus = graph[r][c] & graph[rr][cc]
+                if bus and not bus & b:
+                    queue.append((rr, cc, bus))
+                    visited[rr][cc] = visited[r][c] + 1
+                elif bus and bus & b:
+                    queue.append((rr, cc, bus))
+                    visited[rr][cc] = visited[r][c]
+
+bfs(sr, sc)
+
+print(visited[gr][gc])
+
+
