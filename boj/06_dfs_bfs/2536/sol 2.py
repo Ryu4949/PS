@@ -1,10 +1,9 @@
 #메모리초과
-
 from collections import deque
 
 M, N = map(int, input().split())
 K = int(input())
-graph = [[set() for _ in range(M)] for _ in range(N)]
+graph = [[0] * M for _ in range(N)]
 
 for _ in range(K):
     b, x1, y1, x2, y2 = map(int, input().split())
@@ -15,7 +14,7 @@ for _ in range(K):
 
     for i in range(y1, y2+1):
         for j in range(x1, x2+1):
-            graph[i-1][j-1].add(b-1)
+            graph[i-1][j-1] |= (1<<b-1)
 
 sc, sr, gc, gr = map(int, input().split())
 sc -= 1
@@ -35,7 +34,6 @@ def bfs(r, c):
 
     while queue:
         r, c, b = queue.popleft()
-        print(f'r, c, b: {r, c, b}')
 
         for i in range(4):
             rr, cc = r+dr[i], c+dc[i]

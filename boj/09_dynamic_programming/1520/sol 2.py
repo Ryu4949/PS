@@ -1,8 +1,6 @@
-#메모리초과?
-
 import sys
 input = sys.stdin.readline
-sys.setrecursionlimit(10 ** 8)
+sys.setrecursionlimit(10 ** 4)
 
 M, N = map(int, input().split())
 graph = [list(map(int, input().split())) for _ in range(M)]
