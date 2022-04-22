@@ -1,3 +1,4 @@
+#솔직히 뭐가 그리 다른지 모르겠는데 통과가 안됨
 from collections import deque
 
 def bfs(r, c):
@@ -12,13 +13,14 @@ def bfs(r, c):
             rr, cc = r+dr[i], c+dc[i]
 
             if 0<=rr<N and 0<=cc<M and graph[rr][cc] != '#' and visited[rr][cc] != key:
-                if graph[rr][cc].islower():
-                    queue.append((rr, cc, key|(1<<keys[graph[rr][cc]]), cnt+1))
-                    visited[rr][cc] = key|(1<<keys[graph[rr][cc]])
-                elif graph[rr][cc].isupper() and key & (1<<doors[graph[rr][cc]]):
+                if graph[rr][cc] == '.':
                     queue.append((rr, cc, key, cnt+1))
                     visited[rr][cc] = key
-                elif graph[rr][cc] == '.' or graph[rr][cc] == '0':
+                elif 'a'<=graph[rr][cc]<='f':
+                    new_key = key|1<<(ord(graph[rr][cc])-97)
+                    queue.append((rr, cc, new_key, cnt+1))
+                    visited[rr][cc] = new_key
+                elif 'A'<=graph[rr][cc]<='F' and key & (1<<(ord(graph[rr][cc])-65)):
                     queue.append((rr, cc, key, cnt+1))
                     visited[rr][cc] = key
                 elif graph[rr][cc] == '1':
@@ -32,10 +34,8 @@ for i in range(N):
     for j in range(M):
         if graph[i][j] == '0':
             sx, sy = i, j
+            graph[i][j] = '.'
             break
-
-keys = {'a': 0, 'b': 1, 'c': 2, 'd': 3, 'e': 4, 'f': 5}
-doors = {'A': 0, 'B': 1, 'C': 2, 'D': 3, 'E': 4, 'F': 5}
 
 dr = [-1, 1, 0, 0]
 dc = [0, 0, -1, 1]
