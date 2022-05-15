@@ -1,7 +1,23 @@
+#시간초과
+
 import heapq
 
-a = [1, 9, 3, 4, 5, 6, 7, 3, 1]
-heapq.heapify(a)
+heap1 = []
+heap2 = []
 
-for i in range(9):
-    print(a[i])
+N = int(input())
+for _ in range(N):
+    num = int(input())
+    if len(heap1) <= len(heap2):
+        if heap2 and num > heap2[0]:
+            heapq.heappush(heap2, num)
+            heapq.heappush(heap1, -heapq.heappop(heap2))
+        else:
+            heapq.heappush(heap1, -num)
+    else:
+        if num >= -heap1[0]:
+            heapq.heappush(heap2, num)
+        else:
+            heapq.heappush(heap1, -num)
+            heapq.heappush(heap2, -heapq.heappop(heap1))
+
