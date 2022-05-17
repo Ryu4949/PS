@@ -4,9 +4,8 @@ while True:
     if T[-1] == 'A':
         T = T[:-1]
     else:
-        T = T[::-1]
+        T = T[:-1][::-1]
 
-    print(T)
     if not T:
         print(0)
         break
