@@ -11,4 +11,4 @@ while True:
         else:
             total += 3
     total += 1+len(num)
-    print(total)
+    print(total) 
